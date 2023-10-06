@@ -1,64 +1,75 @@
-// bemærk hvis man skal oprette flere canvas og køre ikke-global mode
-// https://github.com/processing/p5.js/wiki/p5.js-overview#instantiation--namespace
-// https://www.youtube.com/watch?v=Su792jEauZg
-// derman kan man oprette instans som objekt, hvori sketchen kører
-// Og man kan oprette flere canvas med samme sketch eller
-// forskellige sketches i forskellige canvas
-// instans mode skal closure på variable - namespacing - vs global mode med globale variable
+<!DOCTYPE html>
+<html>
 
-// tilføj knapper, og tilføj eventlistener til knappen, funktionskald
-// 10 spring til siden hurtigt nok - gør baggrunden helt hvid...
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"
+        integrity="sha512-bcfltY+lNLlNxz38yBBm/HLaUB1gTV6I0e+fahbF9pS6roIdzUytozWdnFV8ZnM6cSAG5EbmO0ag0a/fLZSG4Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-let y = 10; let r = 200; g = 180; b = 0;
-let ned = true;
-let rystet = 0;
-let flyttet = 0;
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Testside</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: lightgray;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            /* vmin skalerer responsivt til viewporten */
+            letter-spacing: 1vmin;
+        }
 
-function setup() {
-    canvas = createCanvas(300, 550, 'beholder');
-    textSize(24);
-    // giver canvas border på 2 pixel, 
-    // og sørger derefter for at kanten tælles med i width
-    canvas.elt.style.border = '5px solid black';
-    canvas.elt.style.boxSizing = 'border-box';
-    canvas.elt.style.borderRadius = '20px';
+        .beholder {
+            max-width: 100%;
+            text-align: center;
+            color: rgb(31, 28, 28);
+            background-color: rgb(212, 104, 131);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            /* 3 kolonner, fr står for fraction, */
+            /* grid-gap: 5%; */
+            /* %-enhed gør det også responsivt */
+        }
+        .beholder-item {
+            /* Grid item styles */
+        }
+        @media (max-width: 768px) {
+            .beholder {
+                grid-template-columns: 1fr 1fr;
+                /* 2 kolonner på små skærme */
+            }
+        }
+        @media (max-width: 480px) {
+            .beholder {
+                grid-template-columns: 1fr;
+                /* 1 kolonne på ekstra små skærme */
+                /* her bruges navnene - 6 gange per kolonne skal følges
+            hele vejen ned, se andet eksempel med 3 i kolonnen  
+            menu-item løber over to rækker i samme kolonne*/
+            grid-template-areas:
+                'header'
+                'menu'
+                'main'
+                'footer';
+            }
 
-    canvas.parent('#beholder');
-    // gør canvas-elementet responsivt til skærmbredden
-    canvas.elt.style.width = '100%';
-    canvas.elt.style.height = '100%';
+            
+        }
+    </style>
+</head>
 
-    //bemærk at noden skal pakkes ud via .elt
-    const parentDiv = select('#beholder').elt;
-    const p = select('#test1').elt;
-    // indsæt canvas i ny position i rækkefølgen af elementer i div'en beholder
-    parentDiv.insertBefore(canvas.elt, p);
-}
+<body>
+    <div class="beholder" id="beholder">
+        <h1>Bevæg dig!</h1>
+        <p id="test1">test1</p>
+        <p>test2</p>
+        <h3>test4</h3>
+        <h2 id="test5">test5</h2>
 
-function draw() {
-    background(r, g, b);
-    strokeWeight(10);
-    ellipse(width / 2, y, 50);
-    if (ned)
-        y++;
-    else
-        y--;
-    if (y >= height || y <= 0)
-        ned = !ned;
-    if (accelerationX > 70) {
-        r = random(0, 256);
-        g = random(0, 256);
-        b = random(0, 256);
-        if(rystet%2 == 0)
-        ned = !ned;
-        rystet++;
-    }
-    
-text('rystet: ' + str(rystet), 50, height-100);
-text('flyttet: ' + str(flyttet),50, height-50);
-}
+    </div>
+    <!-- <her kan man referere sin js-fil, fx -->
+    <script src='webAccelResponsiv.js'></script>
+</body>
 
-function deviceMoved(){
-    flyttet++;
-
-}
+</html>
