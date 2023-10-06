@@ -44,6 +44,7 @@ function setup() {
 function draw() {
     background(r, g, b);
     strokeWeight(10);
+    imageMode(CENTER);
     image(img, width/2, y);
     if (ned)
         y++;
