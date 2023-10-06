@@ -13,9 +13,12 @@ let y = 10; let r = 200; g = 180; b = 0;
 let ned = true;
 let rystet = 0;
 let flyttet = 0;
+let img;
+
 
 function setup() {
     canvas = createCanvas(300, 550, 'beholder');
+    img = loadImage('assets/Necoarc.png');
     textSize(24);
     // giver canvas border på 2 pixel, 
     // og sørger derefter for at kanten tælles med i width
@@ -38,6 +41,7 @@ function setup() {
 function draw() {
     background(r, g, b);
     strokeWeight(10);
+    image(img, width/2, y);
     ellipse(width / 2, y, 50);
     if (ned)
         y++;
