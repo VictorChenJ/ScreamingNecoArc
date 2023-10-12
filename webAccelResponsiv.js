@@ -50,6 +50,8 @@ function draw() {
     strokeWeight(10);
     imageMode(CENTER);
     image(img, x, y,90,150);
+    deaccel()
+    shake()
     if (ned)
         y++;
 
@@ -71,7 +73,6 @@ function draw() {
         ned = !ned;
         rystet++;
     }
-    
 text('rystet: ' + str(rystet), 50, height-100);
 text('flyttet: ' + str(flyttet),50, height-50);
 }
@@ -82,13 +83,28 @@ function deviceMoved(){
 }
 function shake(){
     if (accelerationX>40){
-    accelerationX*0.2+necoAccelX+1==necoAccelX;
+        if(necoAccelX>=0){
+            necoAccelX=1
+        }    
+    accelerationX*0.2*necoAccelX==necoAccelX;
     }
     if (accelerationY>40){
-    accelerationY*0.2+necoAccelY+1==necoAccelY;
+        if(necoAccelY>=0){
+            necoAccelY=1
+        }    
+    accelerationY*0.*necoAccelY==necoAccelY;
     }
 }
 function deaccel(){
-    
+    necoAccelX-necoAccelX/5==necoAccelX
+    necoAccelY-necoAccelY/5==necoAccelY
+    if(necoAccelX>0.5){
+        necoAccelX=0
+    }
+    if(necoAccelY>0.5){
+        necoAccelY=0
+    }
+
+
 
 }
