@@ -9,8 +9,10 @@
 // tilføj knapper, og tilføj eventlistener til knappen, funktionskald
 // 10 spring til siden hurtigt nok - gør baggrunden helt hvid...
 
-let y = 10; let r = 200; g = 180; b = 0;
+let y = 300; let r = 200; g = 180; b = 0;
+let x = 150
 let ned = true;
+let venstre = true;
 let rystet = 0;
 let flyttet = 0;
 let img;
@@ -45,13 +47,20 @@ function draw() {
     background(r, g, b);
     strokeWeight(10);
     imageMode(CENTER);
-    image(img, width/2, y);
+    image(img, x, y,90,150);
     if (ned)
         y++;
+
     else
         y--;
-    if (y >= height || y <= 0)
+    if (venstre)
+        x++;
+    else
+        x--;
+    if (y+img.height/2 >= height || y-img.height/2 <= 0)
         ned = !ned;
+        if (x+img.width/2 >= width || x-img.width/2 <= 0)
+        venstre = !venstre;
     if (accelerationX > 70) {
         r = random(0, 256);
         g = random(0, 256);
