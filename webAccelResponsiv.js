@@ -16,6 +16,8 @@ let venstre = true;
 let rystet = 0;
 let flyttet = 0;
 let img;
+let necoAccelX= 0;
+let necoAccelY= 0;
 
 
 function preload() {
@@ -76,5 +78,17 @@ text('flyttet: ' + str(flyttet),50, height-50);
 
 function deviceMoved(){
     flyttet++;
+
+}
+function shake(){
+    if (accelerationX>40){
+    accelerationX*0.2+necoAccelX+1==necoAccelX;
+    }
+    if (accelerationY>40){
+    accelerationY*0.2+necoAccelY+1==necoAccelY;
+    }
+}
+function deaccel(){
+    
 
 }
