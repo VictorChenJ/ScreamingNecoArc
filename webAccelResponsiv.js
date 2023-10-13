@@ -54,7 +54,7 @@ function draw() {
     strokeWeight(10);
     imageMode(CENTER);
     image(img, x, y,90,150);
-    
+    changeDirection()
     deaccel()
     shake()
     if (ned)
@@ -101,7 +101,6 @@ function deaccel(){
     necoAccelX=necoAccelX-necoAccelX/15
     print(necoAccelX)
     necoAccelY=necoAccelY-necoAccelY/15
-    print("deaccel")
     if(necoAccelX<0.01){
         necoAccelX=0
     }
@@ -112,13 +111,13 @@ function deaccel(){
 
 }
 function changeDirection(){
-    if (y+img.height/2 >= height || y-img.height/2 <= 0)
-    ned = !ned;
-    if (y+img.height/2 >= height || y-img.height/2 <= 0)
-    ned = !ned;
-
-    if (x+img.width/2 <= 0||venstre)
-    venstre = !venstre;
-    if (x-img.width/2 <= 0|| venstre)
-    venstre = !venstre;
+    if (y-img.height/2 >= 0 && ned==true)
+    ned=false
+    if (y+img.height/2 >= height && ned==false)
+    ned=true
+    if (x+img.width/2 >= width && venstre==true)
+    venstre=false
+print(venstre)
+    if (x-img.width/2 <= 0 && venstre==false)
+    venstre =true
 }
