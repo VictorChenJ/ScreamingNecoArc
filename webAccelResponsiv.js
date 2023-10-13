@@ -25,10 +25,10 @@ let shaking = false;
 
 
 function preload() {
-    imgNeutral = loadImage('assets/necoNeutral.gif');
-    imgDeath = loadImage('assets/necoDeath.gif');
-    imgFall = loadImage('assets/necoFall.gif');
-    imgFell = loadImage('assets/necoFall.png');
+    imgNeutral = loadImage('necoNeutral.gif');
+    imgDeath = loadImage('necoDeath.gif');
+    imgFall = loadImage('necoFall.gif');
+    imgFell = loadImage('necoFell.png');
   }
 
 function setup() {
@@ -58,10 +58,10 @@ function draw() {
     strokeWeight(10);
     imageMode(CENTER);
 
-    if(accelerationX > 0 && accelerationY > 0) {
+    if(necoAccelX > 0 && necoAccelY > 0) {
         image(imgDeath, x, y, 90,150);
     }
-    else if(accelerationY > 0 && accelerationX <= 0){
+    else if(necoAccelY > 0 && necoAccelX <= 0){
         image(imgFall, x, y, 90,150);
     }
     else{
