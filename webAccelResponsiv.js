@@ -21,10 +21,14 @@ let necoAccelY=5;
 let test=true;
 let acceltest=100;
 let gravity=1;
+let shaking = false;
 
 
 function preload() {
-    img = loadImage('Necoarc.jpg');
+    imgNeutral = loadImage('necoNeutral.gif');
+    imgDeath = loadImage('necoDeath.gif');
+    imgFall = loadImage('necoFall.gif');
+    imgFell = loadImage('necoFell.png');
   }
 
 function setup() {
@@ -53,8 +57,17 @@ function draw() {
     background(r, g, b);
     strokeWeight(10);
     imageMode(CENTER);
-    image(img, x, y,90,150);
-    changeDirection()
+
+    if(necoAccelX > 0 && necoAccelY > 0) {
+        image(imgDeath, x, y, 90,150);
+    }
+    else if(necoAccelY > 0 && necoAccelX <= 0){
+        image(imgFall, x, y, 90,150);
+    }
+    else{
+        image(imgNeutral, x, y,90,150);
+    }
+    
     deaccel()
     shake()
     if (ned)
@@ -110,6 +123,7 @@ function deaccel(){
 
 
 }
+
 function changeDirection(){
     if (y-img.height/2 >= 0 && ned==true)
     ned=false
