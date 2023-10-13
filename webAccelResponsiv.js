@@ -9,15 +9,18 @@
 // tilføj knapper, og tilføj eventlistener til knappen, funktionskald
 // 10 spring til siden hurtigt nok - gør baggrunden helt hvid...
 
-let y = 300; let r = 200; g = 180; b = 0;
+let y = 100; let r = 200; g = 180; b = 0;
 let x = 150
 let ned = true;
 let venstre = true;
 let rystet = 0;
 let flyttet = 0;
 let img;
-let necoAccelX= 0;
-let necoAccelY= 0;
+let necoAccelX=5;
+let necoAccelY=5;
+let test=true;
+let acceltest=100;
+let gravity=1;
 
 
 function preload() {
@@ -46,25 +49,22 @@ function setup() {
 }
 
 function draw() {
+    print(necoAccelY)
     background(r, g, b);
     strokeWeight(10);
     imageMode(CENTER);
     image(img, x, y,90,150);
+    
     deaccel()
     shake()
     if (ned)
-        y++;
-
+        y=y+necoAccelY+gravity;
     else
-        y--;
+        y=y-necoAccelY;
     if (venstre)
-        x++;
+    x=x+necoAccelX;
     else
-        x--;
-    if (y+img.height/2 >= height || y-img.height/2 <= 0)
-        ned = !ned;
-        if (x+img.width/2 >= width || x-img.width/2 <= 0)
-        venstre = !venstre;
+    x=x-necoAccelX;
     if (accelerationX > 70) {
         r = random(0, 256);
         g = random(0, 256);
@@ -82,29 +82,43 @@ function deviceMoved(){
 
 }
 function shake(){
-    if (accelerationX>40){
-        if(necoAccelX>=0){
+    if (accelerationX>40||test==true){
+        if(necoAccelX<=1){
             necoAccelX=1
         }    
-    accelerationX*0.2*necoAccelX==necoAccelX;
+        necoAccelX=acceltest*0.01+necoAccelX;
     }
-    if (accelerationY>40){
-        if(necoAccelY>=0){
+    if (accelerationY>40||test==true){
+        if(necoAccelY<=1){
             necoAccelY=1
-        }    
-    accelerationY*0.*necoAccelY==necoAccelY;
+            
+        }       
+        necoAccelY=acceltest*0.01+necoAccelY;
     }
 }
 function deaccel(){
-    necoAccelX-necoAccelX/5==necoAccelX
-    necoAccelY-necoAccelY/5==necoAccelY
-    if(necoAccelX>0.5){
+    /*deaccel*/
+    necoAccelX=necoAccelX-necoAccelX/15
+    print(necoAccelX)
+    necoAccelY=necoAccelY-necoAccelY/15
+    print("deaccel")
+    if(necoAccelX<0.01){
         necoAccelX=0
     }
-    if(necoAccelY>0.5){
+    if(necoAccelY<0.01){
         necoAccelY=0
     }
 
 
+}
+function changeDirection(){
+    if (y+img.height/2 >= height || y-img.height/2 <= 0)
+    ned = !ned;
+    if (y+img.height/2 >= height || y-img.height/2 <= 0)
+    ned = !ned;
 
+    if (x+img.width/2 <= 0||venstre)
+    venstre = !venstre;
+    if (x-img.width/2 <= 0|| venstre)
+    venstre = !venstre;
 }
