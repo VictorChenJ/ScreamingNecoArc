@@ -26,6 +26,7 @@ let halvhoejde =75;
 let halvbredde= 45;
 
 
+
 function preload() {
     imgNeutral = loadImage('necoNeutral.gif');
     imgDeath = loadImage('necoDeath.gif');
@@ -96,14 +97,14 @@ function shake(){
         if(necoAccelX<=1){
             necoAccelX=1
         }    
-        necoAccelX=acceltest*0.027+necoAccelX;
+        necoAccelX=accelerationX*0.027+necoAccelX;
     }
     if (accelerationY>40||test==true){
         if(necoAccelY<=1){
             necoAccelY=1
             
         }       
-        necoAccelY=gravity+acceltest*0.027+necoAccelY;
+        necoAccelY=gravity+accelerationY*0.027+necoAccelY;
     }
 }
 
@@ -122,7 +123,7 @@ function deaccel(){
 function changeDirection(){
     if (y+halvhoejde >= 0/*&& ned==false*/)
     y=halvhoejde
-    ned=!ned
+    
     if (y+imgDeath.height/2 >= height/*&& ned==true*/)
     y=height+halvhoejde/2;
     ned=!ned
@@ -136,15 +137,19 @@ function changeDirection(){
 function A(){
 if(y>=height-halvhoejde){
     y=height-halvhoejde
+    necoAccelY=-necoAccelY
 }
 if(y-halvhoejde<0){
     y=halvhoejde/2
+    necoAccelY=-necoAccelY
 }
 if(x-halvbredde<=0){
     x=halvbredde
+    necoAccelX=-necoAccelX
 }
 if(x+halvbredde>=width){
     x=width-halvbredde
+    necoAccelX=-necoAccelX
 }
 
 
