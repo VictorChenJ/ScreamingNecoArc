@@ -20,7 +20,7 @@ let necoAccelX=5;
 let necoAccelY=5;
 let test=false;
 let acceltest=0;
-let gravity=-1.5;
+let gravity=1.5;
 let shaking = false;
 let halvhoejde =75;
 let halvbredde= 45;
@@ -142,6 +142,9 @@ if(y-halvhoejde<0){
 }
 if(x-halvbredde<=0){
     x=halvbredde
+}
+if(x+halvbredde>=width){
+    x=width-halvbredde
 }
 
 
