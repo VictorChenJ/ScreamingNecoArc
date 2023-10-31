@@ -18,10 +18,12 @@ let flyttet = 0;
 let img;
 let necoAccelX=5;
 let necoAccelY=5;
-let test=true;
-let acceltest=100;
-let gravity=1;
+let test=false;
+let acceltest=0;
+let gravity=-1.5;
 let shaking = false;
+let halvhoejde =75;
+let halvbredde= 45;
 
 
 function preload() {
@@ -53,7 +55,6 @@ function setup() {
 }
 
 function draw() {
-    print(necoAccelY)
     background(r, g, b);
     strokeWeight(10);
     imageMode(CENTER);
@@ -67,52 +68,48 @@ function draw() {
     else{
         image(imgNeutral, x, y,90,150);
     }
-    
+    /*changeDirection()*/
     deaccel()
     shake()
-    if (ned)
-        y=y+necoAccelY+gravity;
-    else
-        y=y-necoAccelY;
-    if (venstre)
-    x=x+necoAccelX;
-    else
-    x=x-necoAccelX;
+    /*updateDirection()*/
+    A()
     if (accelerationX > 70) {
         r = random(0, 256);
         g = random(0, 256);
         b = random(0, 256);
         if(rystet%2 == 0)
-        ned = !ned;
         rystet++;
     }
 text('rystet: ' + str(rystet), 50, height-100);
 text('flyttet: ' + str(flyttet),50, height-50);
+y=y+necoAccelY+gravity;
+x=x+necoAccelX;
 }
 
 function deviceMoved(){
     flyttet++;
 
 }
+
 function shake(){
     if (accelerationX>40||test==true){
         if(necoAccelX<=1){
             necoAccelX=1
         }    
-        necoAccelX=acceltest*0.01+necoAccelX;
+        necoAccelX=acceltest*0.027+necoAccelX;
     }
     if (accelerationY>40||test==true){
         if(necoAccelY<=1){
             necoAccelY=1
             
         }       
-        necoAccelY=acceltest*0.01+necoAccelY;
+        necoAccelY=gravity+acceltest*0.027+necoAccelY;
     }
 }
+
 function deaccel(){
     /*deaccel*/
     necoAccelX=necoAccelX-necoAccelX/15
-    print(necoAccelX)
     necoAccelY=necoAccelY-necoAccelY/15
     if(necoAccelX<0.01){
         necoAccelX=0
@@ -120,18 +117,36 @@ function deaccel(){
     if(necoAccelY<0.01){
         necoAccelY=0
     }
-
-
 }
 
 function changeDirection(){
-    if (y-img.height/2 >= 0 && ned==true)
-    ned=false
-    if (y+img.height/2 >= height && ned==false)
-    ned=true
-    if (x+img.width/2 >= width && venstre==true)
+    if (y+halvhoejde >= 0/*&& ned==false*/)
+    y=halvhoejde
+    ned=!ned
+    if (y+imgDeath.height/2 >= height/*&& ned==true*/)
+    y=height+halvhoejde/2;
+    ned=!ned
+    if (x+imgDeath.width/2 >= width/*&& venstre==true*/)
+    /*x=width*/
     venstre=false
-print(venstre)
-    if (x-img.width/2 <= 0 && venstre==false)
+    if (x-imgDeath.width/2 <= 0 /*&& venstre==false*/)
+    /*x=0*/
     venstre =true
+}   
+function A(){
+if(y>=height-halvhoejde){
+    y=height-halvhoejde
+}
+if(y-halvhoejde<0){
+    y=halvhoejde/2
+}
+if(x-halvbredde<=0){
+    x=halvbredde
+}
+
+
+}
+function updateDirection(){
+    necoAccelX=-necoAccelX
+    necoAccelY=-necoAccelY
 }
