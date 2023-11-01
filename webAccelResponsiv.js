@@ -93,7 +93,10 @@ y=y+necoAccelY+gravity;
 else{
     y=y-necoAccelY;
 }
-rystet=accelerationY
+if (accelerationX==true){
+    accelerationX=0
+    rystet=0
+}
 }
 
 function shake(){
