@@ -64,7 +64,7 @@ function setup() {
 
     imgBg.resize(width, height);
     imageMode(CORNER);
-
+    setShakeThreshold(1);
 }
 
 function draw() {
@@ -84,8 +84,8 @@ function draw() {
         image(imgNeutral, x, y, 90, 150);
     }
     changeDirection()
+
     deaccel()
-    shake()
     /*updateDirection()*/
     text('rystet: ' + str(rystet), 50, height - 100);
     text('flyttet: ' + str(flyttet), 50, height - 50);
@@ -101,31 +101,31 @@ function draw() {
         y = y - necoAccelY;
     }
     if (accelerationX == true) {
-        accelerationX = 0
-        rystet = 0
+        accelerationX = 0;
+        rystet = 0;
     }
 }
 
 function deviceShaken() {
-    necoAccelX = necoAccelX + 15
-    necoAccelY = necoAccelY + 15
+    necoAccelX = necoAccelX + 15;
+    necoAccelY = necoAccelY + 15;
 
 }
 
 function deaccel() {
-    necoAccelX = necoAccelX - necoAccelX / 15
-    necoAccelY = necoAccelY - necoAccelY / 15
+    necoAccelX = necoAccelX - necoAccelX / 15;
+    necoAccelY = necoAccelY - necoAccelY / 15;
     if (necoAccelX < 0.01) {
-        necoAccelX = 0
+        necoAccelX = 0;
     }
     if (necoAccelY < 0.01) {
-        necoAccelY = 0
+        necoAccelY = 0;
     }
 }
 
 function changeDirection() {
     if (y >= height - halvhoejde) {
-        y = height - halvhoejde
+        y = height - halvhoejde;
         if (accelerationY > 0) {
             necoAccelY = -necoAccelY
         }
@@ -133,24 +133,24 @@ function changeDirection() {
     if (y - halvhoejde < 0) {
         y = halvhoejde / 2
         if (accelerationY < 0) {
-            necoAccelY = -necoAccelY
+            necoAccelY = -necoAccelY;
         }
     }
     if (x - halvbredde <= 0) {
         x = halvbredde
         if (accelerationX < 0) {
-            necoAccelX = -necoAccelX
+            necoAccelX = -necoAccelX;
         }
     }
     if (x + halvbredde >= width) {
         x = width - halvbredde
         if (accelerationX > 0) {
-            necoAccelX = -necoAccelX
+            necoAccelX = -necoAccelX;
         }
     }
 }
 
 function updateDirection() {
-    necoAccelX = -necoAccelX
-    necoAccelY = -necoAccelY
+    necoAccelX = -necoAccelX;
+    necoAccelY = -necoAccelY;
 }
