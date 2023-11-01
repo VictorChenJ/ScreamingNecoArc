@@ -69,11 +69,10 @@ function draw() {
     else{
         image(imgNeutral, x, y,90,150);
     }
-    /*changeDirection()*/
+    changeDirection()
     deaccel()
     shake()
     /*updateDirection()*/
-    A()
     if (accelerationX > 70) {
         r = random(0, 256);
         g = random(0, 256);
@@ -83,13 +82,18 @@ function draw() {
     }
 text('rystet: ' + str(rystet), 50, height-100);
 text('flyttet: ' + str(flyttet),50, height-50);
-y=y+necoAccelY+gravity;
+if(venstre==true)
+x=x-necoAccelX;
+else{
 x=x+necoAccelX;
 }
-
-function deviceMoved(){
-    flyttet++;
-
+if(ned==true){
+y=y+necoAccelY+gravity;
+}
+else{
+    y=y+necoAccelY;
+}
+rystet=accelerationX
 }
 
 function shake(){
@@ -109,7 +113,6 @@ function shake(){
 }
 
 function deaccel(){
-    /*deaccel*/
     necoAccelX=necoAccelX-necoAccelX/15
     necoAccelY=necoAccelY-necoAccelY/15
     if(necoAccelX<0.01){
@@ -121,47 +124,32 @@ function deaccel(){
 }
 
 function changeDirection(){
-    if (y+halvhoejde >= 0/*&& ned==false*/)
-    y=halvhoejde
-    
-    if (y+imgDeath.height/2 >= height/*&& ned==true*/)
-    y=height+halvhoejde/2;
-    ned=!ned
-    if (x+imgDeath.width/2 >= width/*&& venstre==true*/)
-    /*x=width*/
-    venstre=false
-    if (x-imgDeath.width/2 <= 0 /*&& venstre==false*/)
-    /*x=0*/
-    venstre =true
-}   
-function A(){
-if(y>=height-halvhoejde){
-    y=height-halvhoejde
-    if(accelerationY=true){
-        necoAccelY=-necoAccelY
+    if(y>=height-halvhoejde){
+        y=height-halvhoejde
+        if(accelerationY=true){
+            necoAccelY=-necoAccelY
+        }
     }
-}
-if(y-halvhoejde<0){
-    y=halvhoejde/2
-    if(accelerationY=false){
-        necoAccelY=-necoAccelY
+    if(y-halvhoejde<0){
+        y=halvhoejde/2
+        if(accelerationY=false){
+            necoAccelY=-necoAccelY
+        }
     }
-}
-if(x-halvbredde<=0){
-    x=halvbredde
-    if(accelerationX=false){
+    if(x-halvbredde<=0){
+        x=halvbredde
+        if(accelerationX=false){
+            necoAccelX=-necoAccelX
+        }
+    }
+    if(x+halvbredde>=width){
+        x=width-halvbredde
+        if(accelerationX=true){
         necoAccelX=-necoAccelX
+        }
     }
-}
-if(x+halvbredde>=width){
-    x=width-halvbredde
-    if(accelerationX=true){
-    necoAccelX=-necoAccelX
-    }
-}
+}   
 
-
-}
 function updateDirection(){
     necoAccelX=-necoAccelX
     necoAccelY=-necoAccelY
