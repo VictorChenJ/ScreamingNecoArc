@@ -82,38 +82,58 @@ function draw() {
     else{
         image(imgNeutral, x, y,90,150);
     }
-    /*changeDirection()*/
+    changeDirection()
     deaccel()
     shake()
     /*updateDirection()*/
-    A()
-text('rystet: ' + str(flyttet),50, height-50);
-y=y+necoAccelY+gravity;
-x=x+necoAccelX;
+text('flyttet: ' + str(flyttet),50, height-50);
+if(venstre==true)
+x=x-necoAccelX;
+else{
+x=x-necoAccelX;
 }
-
-function deviceMoved(){
-    flyttet++;
+if(ned==true){
+y=y+necoAccelY+gravity;
+}
+else{
+    y=y-necoAccelY;
+}
+if (accelerationX==true){
+    accelerationX=0
+    rystet=0
+}
 }
 
 function shake(){
-    if (accelerationX>40||test==true){
+    if (!-10<accelerationX>10||test==true){
         if(necoAccelX<=1){
             necoAccelX=1
         }    
+        if(accelerationX>0){
         necoAccelX=accelerationX*0.027+necoAccelX;
+        venstre=true
+
+        }
+        else{
+        necoAccelX=accelerationX*0.027-necoAccelX;
+        venstre=false
+        }
     }
-    if (accelerationY>40||test==true){
+    if (!-10<accelerationY>10||test==true){
         if(necoAccelY<=1){
             necoAccelY=1
             
         }       
+        if(accelerationY>0){
         necoAccelY=accelerationY*0.027+necoAccelY;
+        }
+        else{
+         necoAccelY=accelerationY*0.027-necoAccelY;
+        }
     }
 }
 
 function deaccel(){
-    /*deaccel*/
     necoAccelX=necoAccelX-necoAccelX/15
     necoAccelY=necoAccelY-necoAccelY/15
     if(necoAccelX<0.01){
@@ -125,47 +145,32 @@ function deaccel(){
 }
 
 function changeDirection(){
-    if (y+halvhoejde >= 0/*&& ned==false*/)
-    y=halvhoejde
-    
-    if (y+imgDeath.height/2 >= height/*&& ned==true*/)
-    y=height+halvhoejde/2;
-    ned=!ned
-    if (x+imgDeath.width/2 >= width/*&& venstre==true*/)
-    /*x=width*/
-    venstre=false
-    if (x-imgDeath.width/2 <= 0 /*&& venstre==false*/)
-    /*x=0*/
-    venstre =true
-}   
-function A(){
-if(y>=height-halvhoejde){
-    y=height-halvhoejde
-    if(accelerationY=true){
-        necoAccelY=-necoAccelY
+    if(y>=height-halvhoejde){
+        y=height-halvhoejde
+        if(accelerationY>0){
+            necoAccelY=-necoAccelY
+        }
     }
-}
-if(y-halvhoejde<0){
-    y=halvhoejde/2
-    if(accelerationY=false){
-        necoAccelY=-necoAccelY
+    if(y-halvhoejde<0){
+        y=halvhoejde/2
+        if(accelerationY<0){
+            necoAccelY=-necoAccelY
+        }
     }
-}
-if(x-halvbredde<=0){
-    x=halvbredde
-    if(accelerationX=false){
+    if(x-halvbredde<=0){
+        x=halvbredde
+        if(accelerationX<0){
+            necoAccelX=-necoAccelX
+        }
+    }
+    if(x+halvbredde>=width){
+        x=width-halvbredde
+        if(accelerationX>0){
         necoAccelX=-necoAccelX
+        }
     }
-}
-if(x+halvbredde>=width){
-    x=width-halvbredde
-    if(accelerationX=true){
-    necoAccelX=-necoAccelX
-    }
-}
+}   
 
-
-}
 function updateDirection(){
     necoAccelX=-necoAccelX
     necoAccelY=-necoAccelY
