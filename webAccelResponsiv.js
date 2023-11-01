@@ -64,7 +64,6 @@ function setup() {
 
     imgBg.resize(width, height);
     imageMode(CORNER);
-    setShakeThreshold(1);
 }
 
 function draw() {
@@ -84,8 +83,8 @@ function draw() {
         image(imgNeutral, x, y, 90, 150);
     }
     changeDirection()
-
     deaccel()
+    shake()
     /*updateDirection()*/
     text('rystet: ' + str(rystet), 50, height - 100);
     text('flyttet: ' + str(flyttet), 50, height - 50);
@@ -106,10 +105,33 @@ function draw() {
     }
 }
 
-function deviceShaken() {
-    necoAccelX = necoAccelX + 15;
-    necoAccelY = necoAccelY + 15;
+function shake() {
+    if (!-10 < accelerationX > 10 || test == true) {
+        if (necoAccelX <= 1) {
+            necoAccelX = 1;
+        }
+        if (accelerationX > 0) {
+            necoAccelX = accelerationX * 0.027 + necoAccelX;
+            venstre = true;
 
+        }
+        else {
+            necoAccelX = accelerationX * 0.027 - necoAccelX;
+            venstre = false;
+        }
+    }
+    if (!-10 < accelerationY > 10 || test == true) {
+        if (necoAccelY <= 1) {
+            necoAccelY = 1;
+
+        }
+        if (accelerationY > 0) {
+            necoAccelY = accelerationY * 0.027 + necoAccelY;
+        }
+        else {
+            necoAccelY = accelerationY * 0.027 - necoAccelY;
+        }
+    }
 }
 
 function deaccel() {
@@ -127,23 +149,23 @@ function changeDirection() {
     if (y >= height - halvhoejde) {
         y = height - halvhoejde;
         if (accelerationY > 0) {
-            necoAccelY = -necoAccelY
+            necoAccelY = -necoAccelY;
         }
     }
     if (y - halvhoejde < 0) {
-        y = halvhoejde / 2
+        y = halvhoejde / 2;
         if (accelerationY < 0) {
             necoAccelY = -necoAccelY;
         }
     }
     if (x - halvbredde <= 0) {
-        x = halvbredde
+        x = halvbredde;
         if (accelerationX < 0) {
             necoAccelX = -necoAccelX;
         }
     }
     if (x + halvbredde >= width) {
-        x = width - halvbredde
+        x = width - halvbredde;
         if (accelerationX > 0) {
             necoAccelX = -necoAccelX;
         }
