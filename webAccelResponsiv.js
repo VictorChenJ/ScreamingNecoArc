@@ -24,6 +24,7 @@ let gravity=1.5;
 let shaking = false;
 let halvhoejde =75;
 let halvbredde= 45;
+let start=true;
 
 
 
@@ -32,6 +33,11 @@ function preload() {
     imgDeath = loadImage('necoDeath.gif');
     imgFall = loadImage('necoFall.gif');
     imgFell = loadImage('necoFell.png');
+
+
+
+    imgBg = loadImage('bg.gif');
+    
   }
 
 function setup() {
@@ -47,16 +53,23 @@ function setup() {
     // gør canvas-elementet responsivt til skærmbredden
     canvas.elt.style.width = '100%';
     canvas.elt.style.height = '100%';
+    
 
+    
     //bemærk at noden skal pakkes ud via .elt
     const parentDiv = select('#beholder').elt;
     const p = select('#test1').elt;
     // indsæt canvas i ny position i rækkefølgen af elementer i div'en beholder
     parentDiv.insertBefore(canvas.elt, p);
+
+    imgBg.resize(width, height);
+    imageMode(CORNER);
 }
 
 function draw() {
-    background(r, g, b);
+    imageMode(CORNER);
+    image(imgBg, 0, 0);
+
     strokeWeight(10);
     imageMode(CENTER);
 
@@ -74,22 +87,13 @@ function draw() {
     shake()
     /*updateDirection()*/
     A()
-    if (accelerationX > 70) {
-        r = random(0, 256);
-        g = random(0, 256);
-        b = random(0, 256);
-        if(rystet%2 == 0)
-        rystet++;
-    }
-text('rystet: ' + str(rystet), 50, height-100);
-text('flyttet: ' + str(flyttet),50, height-50);
+text('rystet: ' + str(flyttet),50, height-50);
 y=y+necoAccelY+gravity;
 x=x+necoAccelX;
 }
 
 function deviceMoved(){
     flyttet++;
-
 }
 
 function shake(){
