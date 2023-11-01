@@ -85,30 +85,43 @@ text('flyttet: ' + str(flyttet),50, height-50);
 if(venstre==true)
 x=x-necoAccelX;
 else{
-x=x+necoAccelX;
+x=x-necoAccelX;
 }
 if(ned==true){
 y=y+necoAccelY+gravity;
 }
 else{
-    y=y+necoAccelY;
+    y=y-necoAccelY;
 }
-rystet=accelerationX
+rystet=accelerationY
 }
 
 function shake(){
-    if (accelerationX>40||test==true){
+    if (!-10<accelerationX>10||test==true){
         if(necoAccelX<=1){
             necoAccelX=1
         }    
+        if(accelerationX==true){
         necoAccelX=accelerationX*0.027+necoAccelX;
+        venstre=true
+
+        }
+        else{
+        necoAccelX=accelerationX*0.027-necoAccelX;
+        venstre=false
+        }
     }
-    if (accelerationY>40||test==true){
+    if (!-10<accelerationY>10||test==true){
         if(necoAccelY<=1){
             necoAccelY=1
             
         }       
+        if(accelerationY==true){
         necoAccelY=accelerationY*0.027+necoAccelY;
+        }
+        else{
+         necoAccelY=accelerationY*0.027-necoAccelY;
+        }
     }
 }
 
