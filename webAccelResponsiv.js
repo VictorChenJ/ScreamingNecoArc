@@ -101,7 +101,7 @@ function shake(){
         if(necoAccelX<=1){
             necoAccelX=1
         }    
-        if(accelerationX==true){
+        if(accelerationX>0){
         necoAccelX=accelerationX*0.027+necoAccelX;
         venstre=true
 
@@ -116,7 +116,7 @@ function shake(){
             necoAccelY=1
             
         }       
-        if(accelerationY==true){
+        if(accelerationY>0){
         necoAccelY=accelerationY*0.027+necoAccelY;
         }
         else{
@@ -139,25 +139,25 @@ function deaccel(){
 function changeDirection(){
     if(y>=height-halvhoejde){
         y=height-halvhoejde
-        if(accelerationY=true){
+        if(accelerationY>0){
             necoAccelY=-necoAccelY
         }
     }
     if(y-halvhoejde<0){
         y=halvhoejde/2
-        if(accelerationY=false){
+        if(accelerationY<0){
             necoAccelY=-necoAccelY
         }
     }
     if(x-halvbredde<=0){
         x=halvbredde
-        if(accelerationX=false){
+        if(accelerationX<0){
             necoAccelX=-necoAccelX
         }
     }
     if(x+halvbredde>=width){
         x=width-halvbredde
-        if(accelerationX=true){
+        if(accelerationX>0){
         necoAccelX=-necoAccelX
         }
     }
