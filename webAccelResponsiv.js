@@ -92,7 +92,7 @@ y=y+necoAccelY+gravity;
 }
 
 function shake(){
-    if (!-10<accelerationX>10||test==true){
+    if (10<accelerationX||accelerationX<-10||test==true){
         if(necoAccelX<=1){
             necoAccelX=1
         }    
@@ -106,7 +106,7 @@ function shake(){
         venstre=false
         }
     }
-    if (!-10<accelerationY>10||test==true){
+    if (10<accelerationY||accelerationY<-10||test==true){
         if(necoAccelY<=1){
             necoAccelY=1
             
