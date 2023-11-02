@@ -97,12 +97,12 @@ function shake(){
             necoAccelX=1
         }    
         if(accelerationX>0){
-        necoAccelX=accelerationX*5.4+necoAccelX;
+        necoAccelX=accelerationX*1.35+necoAccelX;
         venstre=true
 
         }
         else{
-        necoAccelX=accelerationX*5.4-necoAccelX;
+        necoAccelX=accelerationX*1.35-necoAccelX;
         venstre=false
         }
     }
@@ -112,10 +112,10 @@ function shake(){
             
         }       
         if(accelerationY>0){
-        necoAccelY=accelerationY*0.027+necoAccelY;
+        necoAccelY=accelerationY*1.35+necoAccelY;
         }
         else{
-         necoAccelY=accelerationY*0.027-necoAccelY;
+         necoAccelY=accelerationY*1.35-necoAccelY;
         }
     }
 }
