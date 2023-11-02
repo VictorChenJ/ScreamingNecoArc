@@ -97,12 +97,12 @@ function shake(){
             necoAccelX=1
         }    
         if(accelerationX>0){
-        necoAccelX=accelerationX*0.27+necoAccelX;
+        necoAccelX=accelerationX*5.4+necoAccelX;
         venstre=true
 
         }
         else{
-        necoAccelX=accelerationX*0.54-necoAccelX;
+        necoAccelX=accelerationX*5.4-necoAccelX;
         venstre=false
         }
     }
@@ -146,15 +146,10 @@ function changeDirection(){
     }
     if(x-halvbredde<=0){
         x=halvbredde
-        if(accelerationX<0){
-            necoAccelX=-necoAccelX
-        }
+
     }
     if(x+halvbredde>=width){
         x=width-halvbredde
-        if(accelerationX>0){
-        necoAccelX=-necoAccelX
-        }
     }
 }   
 
