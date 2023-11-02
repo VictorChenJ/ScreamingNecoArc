@@ -97,12 +97,12 @@ function shake(){
             necoAccelX=1
         }    
         if(accelerationX>0){
-        necoAccelX=accelerationX*0.027+necoAccelX;
+        necoAccelX=accelerationX*0.27+necoAccelX;
         venstre=true
 
         }
         else{
-        necoAccelX=accelerationX*0.054-necoAccelX;
+        necoAccelX=accelerationX*0.54-necoAccelX;
         venstre=false
         }
     }
