@@ -106,37 +106,13 @@ function draw() {
 }
 
 function shake() {
-    if (!-10 < accelerationX > 10 || test == true) {
-        if (necoAccelX <= 1) {
-            necoAccelX = 1;
-        }
-        if (accelerationX > 0) {
-            necoAccelX = accelerationX * 0.027 + necoAccelX;
-            venstre = true;
-
-        }
-        else {
-            necoAccelX = accelerationX * 0.027 - necoAccelX;
-            venstre = false;
-        }
-    }
-    if (!-10 < accelerationY > 10 || test == true) {
-        if (necoAccelY <= 1) {
-            necoAccelY = 1;
-
-        }
-        if (accelerationY > 0) {
-            necoAccelY = accelerationY * 0.027 + necoAccelY;
-        }
-        else {
-            necoAccelY = accelerationY * 0.027 - necoAccelY;
-        }
-    }
+    necoAccelX = accelerationX * deAccel;
+    necoAccelY = accelerationY * deAccel;
 }
 
 function deaccel() {
-    necoAccelX = necoAccelX - necoAccelX / 15;
-    necoAccelY = necoAccelY - necoAccelY / 15;
+    deAccel = necoAccelX - necoAccelX / 15;
+    deAccel = necoAccelY - necoAccelY / 15;
     if (necoAccelX < 0.01) {
         necoAccelX = 0;
     }
