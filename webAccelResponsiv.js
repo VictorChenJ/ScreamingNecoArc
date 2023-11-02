@@ -19,9 +19,8 @@ let img;
 let necoAccelX=5;
 let necoAccelY=5;
 let test=false;
-let acceltest=0;
 let gravity=1.5;
-let shaking = false;
+let shaking = true;
 let halvhoejde =75;
 let halvbredde= 45;
 let start=true;
@@ -67,6 +66,7 @@ function setup() {
 }
 
 function draw() {
+    print(necoAccelX)
     imageMode(CORNER);
     image(imgBg, 0, 0);
 
@@ -102,7 +102,7 @@ function shake(){
 
         }
         else{
-        necoAccelX=accelerationX*0.027-necoAccelX;
+        necoAccelX=accelerationX*0.054-necoAccelX;
         venstre=false
         }
     }
