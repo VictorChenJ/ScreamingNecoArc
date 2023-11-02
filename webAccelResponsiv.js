@@ -16,15 +16,15 @@ let venstre = true;
 let rystet = 0;
 let flyttet = 0;
 let img;
-let necoAccelX = 5;
-let necoAccelY = 5;
-let test = false;
-let acceltest = 0;
-let gravity = 1.5;
+let necoAccelX=5;
+let necoAccelY=5;
+let test=false;
+let acceltest=0;
+let gravity=1.5;
 let shaking = false;
-let halvhoejde = 75;
-let halvbredde = 45;
-let start = true;
+let halvhoejde =75;
+let halvbredde= 45;
+let start=true;
 
 
 
@@ -37,8 +37,8 @@ function preload() {
 
 
     imgBg = loadImage('bg.gif');
-
-}
+    
+  }
 
 function setup() {
     canvas = createCanvas(300, 550, 'beholder');
@@ -53,9 +53,9 @@ function setup() {
     // gør canvas-elementet responsivt til skærmbredden
     canvas.elt.style.width = '100%';
     canvas.elt.style.height = '100%';
+    
 
-
-
+    
     //bemærk at noden skal pakkes ud via .elt
     const parentDiv = select('#beholder').elt;
     const p = select('#test1').elt;
@@ -73,106 +73,92 @@ function draw() {
     strokeWeight(10);
     imageMode(CENTER);
 
-    if (necoAccelX > 0 && necoAccelY > 0) {
-        image(imgDeath, x, y, 90, 150);
+    if(necoAccelX > 0 && necoAccelY > 0) {
+        image(imgDeath, x, y, 90,150);
     }
-    else if (necoAccelY > 0 && necoAccelX <= 0) {
-        image(imgFall, x, y, 90, 150);
+    else if(necoAccelY > 0 && necoAccelX <= 0){
+        image(imgFall, x, y, 90,150);
     }
-    else {
-        image(imgNeutral, x, y, 90, 150);
+    else{
+        image(imgNeutral, x, y,90,150);
     }
     changeDirection()
     deaccel()
     shake()
     /*updateDirection()*/
-    text('rystet: ' + str(rystet), 50, height - 100);
-    text('flyttet: ' + str(flyttet), 50, height - 50);
-    if (venstre == true)
-        x = x - necoAccelX;
-    else {
-        x = x - necoAccelX;
-    }
-    if (ned == true) {
-        y = y + necoAccelY + gravity;
-    }
-    else {
-        y = y - necoAccelY;
-    }
-    if (accelerationX == true) {
-        accelerationX = 0;
-        rystet = 0;
-    }
+text('flyttet: ' + str(flyttet),50, height-50);
+x=x-necoAccelX;
+y=y+necoAccelY+gravity;
 }
 
-function shake() {
-    if (!-10 < accelerationX > 10 || test == true) {
-        if (necoAccelX <= 1) {
-            necoAccelX = 1;
-        }
-        if (accelerationX > 0) {
-            necoAccelX = accelerationX * 0.027 + necoAccelX;
-            venstre = true;
+function shake(){
+    if (!-10<accelerationX>10||test==true){
+        if(necoAccelX<=1){
+            necoAccelX=1
+        }    
+        if(accelerationX>0){
+        necoAccelX=accelerationX*0.027+necoAccelX;
+        venstre=true
 
         }
-        else {
-            necoAccelX = accelerationX * 0.027 - necoAccelX;
-            venstre = false;
+        else{
+        necoAccelX=accelerationX*0.027-necoAccelX;
+        venstre=false
         }
     }
-    if (!-10 < accelerationY > 10 || test == true) {
-        if (necoAccelY <= 1) {
-            necoAccelY = 1;
-
+    if (!-10<accelerationY>10||test==true){
+        if(necoAccelY<=1){
+            necoAccelY=1
+            
+        }       
+        if(accelerationY>0){
+        necoAccelY=accelerationY*0.027+necoAccelY;
         }
-        if (accelerationY > 0) {
-            necoAccelY = accelerationY * 0.027 + necoAccelY;
-        }
-        else {
-            necoAccelY = accelerationY * 0.027 - necoAccelY;
+        else{
+         necoAccelY=accelerationY*0.027-necoAccelY;
         }
     }
 }
 
-function deaccel() {
-    necoAccelX = necoAccelX - necoAccelX / 15;
-    necoAccelY = necoAccelY - necoAccelY / 15;
-    if (necoAccelX < 0.01) {
-        necoAccelX = 0;
+function deaccel(){
+    necoAccelX=necoAccelX-necoAccelX/15
+    necoAccelY=necoAccelY-necoAccelY/15
+    if(necoAccelX<0.01){
+        necoAccelX=0
     }
-    if (necoAccelY < 0.01) {
-        necoAccelY = 0;
-    }
-}
-
-function changeDirection() {
-    if (y >= height - halvhoejde) {
-        y = height - halvhoejde;
-        if (accelerationY > 0) {
-            necoAccelY = -necoAccelY;
-        }
-    }
-    if (y - halvhoejde < 0) {
-        y = halvhoejde / 2;
-        if (accelerationY < 0) {
-            necoAccelY = -necoAccelY;
-        }
-    }
-    if (x - halvbredde <= 0) {
-        x = halvbredde;
-        if (accelerationX < 0) {
-            necoAccelX = -necoAccelX;
-        }
-    }
-    if (x + halvbredde >= width) {
-        x = width - halvbredde;
-        if (accelerationX > 0) {
-            necoAccelX = -necoAccelX;
-        }
+    if(necoAccelY<0.01){
+        necoAccelY=0
     }
 }
 
-function updateDirection() {
-    necoAccelX = -necoAccelX;
-    necoAccelY = -necoAccelY;
+function changeDirection(){
+    if(y>=height-halvhoejde){
+        y=height-halvhoejde
+        if(accelerationY>0){
+            necoAccelY=-necoAccelY
+        }
+    }
+    if(y-halvhoejde<0){
+        y=halvhoejde/2
+        if(accelerationY<0){
+            necoAccelY=-necoAccelY
+        }
+    }
+    if(x-halvbredde<=0){
+        x=halvbredde
+        if(accelerationX<0){
+            necoAccelX=-necoAccelX
+        }
+    }
+    if(x+halvbredde>=width){
+        x=width-halvbredde
+        if(accelerationX>0){
+        necoAccelX=-necoAccelX
+        }
+    }
+}   
+
+function updateDirection(){
+    necoAccelX=-necoAccelX
+    necoAccelY=-necoAccelY
 }
